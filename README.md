@@ -62,7 +62,7 @@ Returns the list of providers currently implemented by this package.
 | Provider     | Status       |
 | ------------ | ------------ |
 | `deepseek`   | ✅ Supported |
-| `anthropic`  | 🚧 Planned   |
+| `anthropic`  | ✅ Supported |
 | `openai`     | 🚧 Planned   |
 | `groq`       | 🚧 Planned   |
 | `openrouter` | 🚧 Planned   |
