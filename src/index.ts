@@ -1,12 +1,14 @@
 import { deepSeekAdapter } from './providers/deepseek';
 import { anthropicAdapter } from './providers/anthropic';
 import type { ModelInfo, Provider, ProviderAdapter } from './types';
+import { openAIAdapter } from './providers/openai';
 
 export type { ModelInfo, Provider };
 
-const adapters: Partial<Record<Provider, ProviderAdapter>> = {
+const adapters: Record<Provider, ProviderAdapter> = {
   deepseek: deepSeekAdapter,
   anthropic: anthropicAdapter,
+  openai: openAIAdapter,
 };
 
 export async function listModels(provider: Provider, apiKey: string): Promise<ModelInfo[]> {

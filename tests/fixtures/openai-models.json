@@ -1,0 +1,33 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "gpt-4",
+      "object": "model",
+      "created": 1687882411,
+      "owned_by": "openai",
+      "shutdown_date": "2026-10-23"
+    },
+    {
+      "id": "gpt-4o-mini",
+      "object": "model",
+      "created": 1721172741,
+      "owned_by": "system",
+      "shutdown_date": null
+    },
+    {
+      "id": "gpt-5",
+      "object": "model",
+      "created": 1754425777,
+      "owned_by": "system",
+      "shutdown_date": null
+    },
+    {
+      "id": "gpt-5-pro",
+      "object": "model",
+      "created": 1759469822,
+      "owned_by": "system",
+      "shutdown_date": null
+    }
+  ]
+}

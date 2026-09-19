@@ -1,5 +1,7 @@
 # 🔍 llm-lister
 
+[![Live tests](https://github.com/proczzz/llm-lister/actions/workflows/live-tests.yml/badge.svg)](https://github.com/proczzz/llm-lister/actions/workflows/live-tests.yml)
+
 Zero-dependency, cross-runtime utility to list the models available to an LLM provider account, given an API key.
 
 Works in Node.js (18+), Cloudflare Workers, browsers, and any other runtime that implements the standard `fetch` API. No SDKs, no bundled provider clients — just a thin wrapper around each provider's `/models` endpoint.
@@ -30,7 +32,7 @@ Check which providers are currently supported:
 import { getSupportedProviders } from 'llm-lister';
 
 getSupportedProviders();
-// ['deepseek']
+// ['deepseek', 'anthropic', 'openai']
 ```
 
 ## 📖 API
@@ -45,11 +47,15 @@ Returns the list of models available to the given API key.
 - Throws if the provider is not supported, the request fails, or the response shape is unexpected.
 
 ```typescript
+type Provider = 'deepseek' | 'anthropic' | 'openai';
+
 interface ModelInfo {
   id: string;
-  provider: string;
+  provider: Provider;
 }
 ```
+
+Models are returned as the provider reports them, without filtering. Depending on the provider this can include non-chat models (for example embeddings or speech models).
 
 ### `getSupportedProviders()`
 
@@ -63,7 +69,7 @@ Returns the list of providers currently implemented by this package.
 | ------------ | ------------ |
 | `deepseek`   | ✅ Supported |
 | `anthropic`  | ✅ Supported |
-| `openai`     | 🚧 Planned   |
+| `openai`     | ✅ Supported |
 | `groq`       | 🚧 Planned   |
 | `openrouter` | 🚧 Planned   |
 
@@ -71,9 +77,19 @@ Returns the list of providers currently implemented by this package.
 
 Each provider lives in its own file under `src/providers/`, implementing the `ProviderAdapter` interface (`src/types.ts`). To add a new provider:
 
-1. Create `src/providers/<name>.ts` exporting a `ProviderAdapter`.
-2. Register it in the `adapters` map in `src/index.ts`.
-3. Add tests under `tests/providers/<name>.test.ts`, mocking `fetch` — do not call the real API in tests.
+1. Add the provider's name to `Provider` in `src/types.ts`.
+2. Create `src/providers/<name>.ts` exporting a `ProviderAdapter`, and register it in `src/index.ts`.
+3. Add `tests/providers/<name>.test.ts` and a sample response under `tests/fixtures/`, following the existing providers. Samples must not contain private data such as organization names or fine-tuned model ids.
+4. Update the table in this README.
+
+### 🧪 Testing
+
+```bash
+npm test            # unit tests: offline, no API keys needed
+npm run test:live   # live tests: call the real provider APIs
+```
+
+Live tests read keys from `<PROVIDER>_API_KEY` environment variables (for example `OPENAI_API_KEY`); providers without a key are skipped locally. They also run weekly on GitHub Actions to catch provider-side API changes, and a maintainer will set up the API key for a new provider.
 
 ## 📄 License
 
