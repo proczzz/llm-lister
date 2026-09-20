@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { getSupportedProviders, listModels } from '../../src';
+import { describe, expect, it } from 'vitest';
+import { getSupportedProviders, listModels, Provider } from '../../src';
 
 // This package deliberately avoids Node type definitions (it targets Node, Workers
 // and browsers), and tests/ is outside tsconfig's scope. Declare only what this
@@ -14,6 +14,9 @@ declare const process: { env: Record<string, string | undefined> };
 // a missing key fails instead, so a mistyped secret name can't silently
 // turn the scheduled run into a permanent green light.
 const requireKeys = process.env.LIVE_REQUIRE_KEYS === '1';
+
+// Providers whose "invalid key" response is not 401.
+const invalidKeyStatus: Partial<Record<Provider, number>> = { gemini: 400 };
 
 for (const provider of getSupportedProviders()) {
   const keyName = `${provider.toUpperCase()}_API_KEY`;
@@ -30,7 +33,7 @@ for (const provider of getSupportedProviders()) {
     });
 
     it('rejects an invalid key', async () => {
-      await expect(listModels(provider, 'invalid-key')).rejects.toThrow('401');
+      await expect(listModels(provider, 'invalid-key')).rejects.toThrow(String(invalidKeyStatus[provider] ?? 401));
     });
   });
 }

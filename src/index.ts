@@ -1,13 +1,15 @@
-import { deepSeekAdapter } from './providers/deepseek';
 import { anthropicAdapter } from './providers/anthropic';
-import type { ModelInfo, Provider, ProviderAdapter } from './types';
+import { deepSeekAdapter } from './providers/deepseek';
+import { geminiAdapter } from './providers/gemini';
 import { openAIAdapter } from './providers/openai';
+import type { ModelInfo, Provider, ProviderAdapter } from './types';
 
 export type { ModelInfo, Provider };
 
 const adapters: Record<Provider, ProviderAdapter> = {
-  deepseek: deepSeekAdapter,
   anthropic: anthropicAdapter,
+  deepseek: deepSeekAdapter,
+  gemini: geminiAdapter,
   openai: openAIAdapter,
 };
 

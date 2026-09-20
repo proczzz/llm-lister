@@ -32,7 +32,7 @@ Check which providers are currently supported:
 import { getSupportedProviders } from 'llm-lister';
 
 getSupportedProviders();
-// ['deepseek', 'anthropic', 'openai']
+// ['anthropic', 'deepseek', 'gemini', ...more]
 ```
 
 ## 📖 API
@@ -47,7 +47,7 @@ Returns the list of models available to the given API key.
 - Throws if the provider is not supported, the request fails, or the response shape is unexpected.
 
 ```typescript
-type Provider = 'deepseek' | 'anthropic' | 'openai';
+type Provider = 'anthropic' | 'deepseek' | 'gemini' | 'openai';
 
 interface ModelInfo {
   id: string;
@@ -67,8 +67,9 @@ Returns the list of providers currently implemented by this package.
 
 | Provider     | Status       |
 | ------------ | ------------ |
-| `deepseek`   | ✅ Supported |
 | `anthropic`  | ✅ Supported |
+| `deepseek`   | ✅ Supported |
+| `gemini`     | ✅ Supported |
 | `openai`     | ✅ Supported |
 | `groq`       | 🚧 Planned   |
 | `openrouter` | 🚧 Planned   |
