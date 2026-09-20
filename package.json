@@ -1,6 +1,6 @@
 {
   "name": "llm-lister",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zero-dependency, cross-runtime utility to list available models for an LLM provider given an API key.",
   "homepage": "https://github.com/proczzz/llm-lister#readme",
   "bugs": {
