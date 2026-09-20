@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { anthropicAdapter } from '../../src/providers/anthropic';
 import modelsFixture from '../fixtures/anthropic-models.json';
 

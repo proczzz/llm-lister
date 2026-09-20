@@ -1,4 +1,4 @@
-import type { ProviderAdapter, ModelInfo } from '../types';
+import type { ModelInfo, ProviderAdapter } from '../types';
 import { assertResponseOk, isModelsResponse } from '../validators';
 
 const OPENAI_MODELS_URL = 'https://api.openai.com/v1/models';

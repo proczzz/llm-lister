@@ -1,4 +1,4 @@
-import type { ProviderAdapter, ModelInfo } from '../types';
+import type { ModelInfo, ProviderAdapter } from '../types';
 import { assertResponseOk, isModelsResponse } from '../validators';
 
 const DEEPSEEK_MODELS_URL = 'https://api.deepseek.com/models';

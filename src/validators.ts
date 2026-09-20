@@ -13,12 +13,15 @@ export function isModelsResponse(body: unknown): body is ModelsResponse {
   const data = (body as { data: unknown }).data;
   if (!Array.isArray(data)) return false;
   return data.every(
-    (item) => typeof item === 'object' && item !== null && typeof (item as { id: unknown }).id === 'string',
+    (item) =>
+      typeof item === 'object' && item !== null && typeof (item as { id: unknown }).id === 'string',
   );
 }
 
 export function assertResponseOk(response: Response, providerName: string): void {
   if (!response.ok) {
-    throw new Error(`Failed to list ${providerName} models: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `Failed to list ${providerName} models: ${response.status} ${response.statusText}`,
+    );
   }
 }

@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { listModels } from '../src';
+import { describe, expect, it } from 'vitest';
 import type { Provider } from '../src';
+import { listModels } from '../src';
 
 describe('listModels', () => {
   it('throws when the provider is not supported', async () => {
