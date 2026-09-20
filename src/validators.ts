@@ -5,7 +5,7 @@
  * A provider whose response differs should define its own guard in its adapter.
  */
 export interface ModelsResponse {
-  data: { id: string }[];
+  data: { id: string } & Record<string, unknown>[];
 }
 
 export function isModelsResponse(body: unknown): body is ModelsResponse {
