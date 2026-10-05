@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { geminiAdapter } from '../../src/providers/gemini';
-import modelsFixture from '../fixtures/gemini-models.json';
+import { googleAdapter } from '../../src/providers/google';
+import modelsFixture from '../fixtures/google-models.json';
 
-describe('geminiAdapter.listModels', () => {
+describe('googleAdapter.listModels', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
   });
@@ -16,12 +16,12 @@ describe('geminiAdapter.listModels', () => {
       }),
     );
 
-    const models = await geminiAdapter.listModels('fake-key');
+    const models = await googleAdapter.listModels('fake-key');
 
     expect(models).toEqual([
-      { id: 'gemini-2.5-flash', provider: 'gemini' },
-      { id: 'gemini-2.5-pro', provider: 'gemini' },
-      { id: 'gemma-4-26b-a4b-it', provider: 'gemini' },
+      { id: 'gemini-2.5-flash', provider: 'google' },
+      { id: 'gemini-2.5-pro', provider: 'google' },
+      { id: 'gemma-4-26b-a4b-it', provider: 'google' },
     ]);
   });
 });

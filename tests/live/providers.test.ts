@@ -16,7 +16,7 @@ declare const process: { env: Record<string, string | undefined> };
 const requireKeys = process.env.LIVE_REQUIRE_KEYS === '1';
 
 // Providers whose "invalid key" response is not 401.
-const invalidKeyStatus: Partial<Record<Provider, number>> = { gemini: 400 };
+const invalidKeyStatus: Partial<Record<Provider, number>> = { google: 400 };
 
 for (const provider of getSupportedProviders()) {
   const keyName = `${provider.toUpperCase()}_API_KEY`;
