@@ -12,18 +12,27 @@ declare const process: { env: Record<string, string | undefined> };
 // Keys are read from <PROVIDER>_API_KEY (e.g. OPENAI_API_KEY).
 // Locally, a missing key skips that provider's test. In CI (LIVE_REQUIRE_KEYS=1)
 // a missing key fails instead, so a mistyped secret name can't silently
-// turn the scheduled run into a permanent green light.
+// turn the scheduled run into a permanent green light. Providers listed in
+// publicModelsEndpoint are exempt: no key is configured for them because their
+// endpoint ignores it, and the invalid-key test below still exercises the call.
 const requireKeys = process.env.LIVE_REQUIRE_KEYS === '1';
 
 // Providers whose "invalid key" response is not 401.
 const invalidKeyStatus: Partial<Record<Provider, number>> = { google: 400 };
 
+// Providers whose /models endpoint is a public catalog: it answers with the full
+// model list even for an invalid key. Asserted below rather than skipped, so the
+// scheduled run turns red if the provider starts authenticating the endpoint.
+const publicModelsEndpoint: Provider[] = ['nvidia'];
+
 for (const provider of getSupportedProviders()) {
   const keyName = `${provider.toUpperCase()}_API_KEY`;
   const apiKey = process.env[keyName];
 
+  const keyRequired = requireKeys && !publicModelsEndpoint.includes(provider);
+
   describe(`${provider} (live)`, () => {
-    it.skipIf(!apiKey && !requireKeys)('lists models with a real key', async () => {
+    it.skipIf(!apiKey && !keyRequired)('lists models with a real key', async () => {
       if (!apiKey) throw new Error(`${keyName} is not set`);
 
       const models = await listModels(provider, apiKey);
@@ -32,8 +41,18 @@ for (const provider of getSupportedProviders()) {
       expect(models[0]).toEqual({ id: expect.any(String), provider });
     });
 
-    it('rejects an invalid key', async () => {
-      await expect(listModels(provider, 'invalid-key')).rejects.toThrow(String(invalidKeyStatus[provider] ?? 401));
-    });
+    if (publicModelsEndpoint.includes(provider)) {
+      it('still lists models with an invalid key (public catalog)', async () => {
+        const models = await listModels(provider, 'invalid-key');
+
+        expect(models.length).toBeGreaterThan(0);
+      });
+    } else {
+      it('rejects an invalid key', async () => {
+        await expect(listModels(provider, 'invalid-key')).rejects.toThrow(
+          String(invalidKeyStatus[provider] ?? 401),
+        );
+      });
+    }
   });
 }

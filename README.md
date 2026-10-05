@@ -47,7 +47,7 @@ Returns the list of models available to the given API key.
 - Throws if the provider is not supported, the request fails, or the response shape is unexpected.
 
 ```typescript
-type Provider = 'anthropic' | 'deepseek' | 'google' | 'openai';
+type Provider = 'anthropic' | 'deepseek' | 'google' | 'nvidia' | 'openai';
 
 interface ModelInfo {
   id: string;
@@ -55,7 +55,7 @@ interface ModelInfo {
 }
 ```
 
-Models are returned as the provider reports them, without filtering. Depending on the provider this can include non-chat models (for example embeddings or speech models).
+Models are returned as the provider reports them, without filtering. Depending on the provider this can include non-chat models (for example embeddings or speech models). Ids are left exactly as the provider reports them, so for `nvidia` they keep their vendor prefix (`meta/llama-3.3-70b-instruct`).
 
 ### `getSupportedProviders()`
 
@@ -70,9 +70,15 @@ Returns the list of providers currently implemented by this package.
 | `anthropic`  | ✅ Supported |
 | `deepseek`   | ✅ Supported |
 | `google`     | ✅ Supported |
+| `nvidia`     | ✅ Supported |
 | `openai`     | ✅ Supported |
 | `groq`       | 🚧 Planned   |
 | `openrouter` | 🚧 Planned   |
+
+> **Note on `nvidia`:** NVIDIA's `/v1/models` endpoint is a public catalog of the models
+> hosted on the platform — it answers with the full list regardless of the key supplied.
+> The key is still sent, so the call keeps working if NVIDIA starts authenticating the
+> endpoint, but unlike the other providers the result is not scoped to your account.
 
 ## 🤝 Contributing
 

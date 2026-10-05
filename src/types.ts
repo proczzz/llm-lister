@@ -1,4 +1,4 @@
-export type Provider = 'anthropic' | 'deepseek' | 'google' | 'openai';
+export type Provider = 'anthropic' | 'deepseek' | 'google' | 'nvidia' | 'openai';
 
 export interface ModelInfo {
   id: string;

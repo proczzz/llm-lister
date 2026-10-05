@@ -1,0 +1,29 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "01-ai/yi-large",
+      "object": "model",
+      "created": 735790403,
+      "owned_by": "01-ai"
+    },
+    {
+      "id": "bigcode/starcoder2-15b",
+      "object": "model",
+      "created": 735790403,
+      "owned_by": "bigcode"
+    },
+    {
+      "id": "deepseek-ai/deepseek-v4.1-flash",
+      "object": "model",
+      "created": 735790403,
+      "owned_by": "deepseek-ai"
+    },
+    {
+      "id": "google/codegemma-7b",
+      "object": "model",
+      "created": 735790403,
+      "owned_by": "google"
+    }
+  ]
+}
