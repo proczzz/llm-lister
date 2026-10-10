@@ -38,8 +38,13 @@
     "llm",
     "ai",
     "models",
+    "anthropic",
     "deepseek",
-    "anthropic"
+    "google",
+    "groq",
+    "nvidia",
+    "openai",
+    "openrouter"
   ],
   "devDependencies": {
     "tsup": "^8.5.1",
