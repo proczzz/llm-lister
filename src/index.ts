@@ -1,6 +1,7 @@
 import { anthropicAdapter } from './providers/anthropic';
 import { deepSeekAdapter } from './providers/deepseek';
 import { googleAdapter } from './providers/google';
+import { groqAdapter } from './providers/groq';
 import { nvidiaAdapter } from './providers/nvidia';
 import { openAIAdapter } from './providers/openai';
 import { openRouterAdapter } from './providers/openrouter';
@@ -12,6 +13,7 @@ const adapters: Record<Provider, ProviderAdapter> = {
   anthropic: anthropicAdapter,
   deepseek: deepSeekAdapter,
   google: googleAdapter,
+  groq: groqAdapter,
   nvidia: nvidiaAdapter,
   openai: openAIAdapter,
   openrouter: openRouterAdapter,

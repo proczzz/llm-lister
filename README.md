@@ -47,7 +47,14 @@ Returns the list of models available to the given API key.
 - Throws if the provider is not supported, the request fails, or the response shape is unexpected.
 
 ```typescript
-type Provider = 'anthropic' | 'deepseek' | 'google' | 'nvidia' | 'openai' | 'openrouter';
+type Provider =
+  | 'anthropic'
+  | 'deepseek'
+  | 'google'
+  | 'groq'
+  | 'nvidia'
+  | 'openai'
+  | 'openrouter';
 
 interface ModelInfo {
   id: string;
@@ -70,10 +77,10 @@ Returns the list of providers currently implemented by this package.
 | `anthropic`  | ✅ Supported |
 | `deepseek`   | ✅ Supported |
 | `google`     | ✅ Supported |
+| `groq`       | ✅ Supported |
 | `nvidia`     | ✅ Supported |
 | `openai`     | ✅ Supported |
 | `openrouter` | ✅ Supported |
-| `groq`       | 🚧 Planned   |
 
 > **Note on `openrouter`:** OpenRouter serves both an unauthenticated catalog at
 > `/api/v1/models` and an account-scoped list at `/api/v1/models/user`. This package queries
