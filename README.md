@@ -47,7 +47,7 @@ Returns the list of models available to the given API key.
 - Throws if the provider is not supported, the request fails, or the response shape is unexpected.
 
 ```typescript
-type Provider = 'anthropic' | 'deepseek' | 'google' | 'nvidia' | 'openai';
+type Provider = 'anthropic' | 'deepseek' | 'google' | 'nvidia' | 'openai' | 'openrouter';
 
 interface ModelInfo {
   id: string;
@@ -55,7 +55,7 @@ interface ModelInfo {
 }
 ```
 
-Models are returned as the provider reports them, without filtering. Depending on the provider this can include non-chat models (for example embeddings or speech models). Ids are left exactly as the provider reports them, so for `nvidia` they keep their vendor prefix (`meta/llama-3.3-70b-instruct`).
+Models are returned as the provider reports them, without filtering. Depending on the provider this can include non-chat models (for example embeddings or speech models). Ids are left exactly as the provider reports them: for `nvidia` and `openrouter` that means they keep their vendor prefix (`meta/llama-3.3-70b-instruct`), and OpenRouter's variant suffixes are preserved too (`anthropic/claude-haiku-5.5:batch`).
 
 ### `getSupportedProviders()`
 
@@ -72,8 +72,13 @@ Returns the list of providers currently implemented by this package.
 | `google`     | ✅ Supported |
 | `nvidia`     | ✅ Supported |
 | `openai`     | ✅ Supported |
+| `openrouter` | ✅ Supported |
 | `groq`       | 🚧 Planned   |
-| `openrouter` | 🚧 Planned   |
+
+> **Note on `openrouter`:** OpenRouter serves both an unauthenticated catalog at
+> `/api/v1/models` and an account-scoped list at `/api/v1/models/user`. This package queries
+> the latter, so the result reflects your provider preferences, privacy settings and
+> guardrails rather than the platform's full catalog.
 
 > **Note on `nvidia`:** NVIDIA's `/v1/models` endpoint is a public catalog of the models
 > hosted on the platform — it answers with the full list regardless of the key supplied.
