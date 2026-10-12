@@ -5,6 +5,7 @@ import { groqAdapter } from './providers/groq';
 import { nvidiaAdapter } from './providers/nvidia';
 import { openAIAdapter } from './providers/openai';
 import { openRouterAdapter } from './providers/openrouter';
+import { xaiAdapter } from './providers/xai';
 import type { ModelInfo, Provider, ProviderAdapter } from './types';
 
 export type { ModelInfo, Provider };
@@ -17,6 +18,7 @@ const adapters: Record<Provider, ProviderAdapter> = {
   nvidia: nvidiaAdapter,
   openai: openAIAdapter,
   openrouter: openRouterAdapter,
+  xai: xaiAdapter,
 };
 
 export async function listModels(provider: Provider, apiKey: string): Promise<ModelInfo[]> {

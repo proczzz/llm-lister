@@ -5,7 +5,8 @@ export type Provider =
   | 'groq'
   | 'nvidia'
   | 'openai'
-  | 'openrouter';
+  | 'openrouter'
+  | 'xai';
 
 export interface ModelInfo {
   id: string;

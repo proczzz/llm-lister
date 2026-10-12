@@ -18,7 +18,7 @@ declare const process: { env: Record<string, string | undefined> };
 const requireKeys = process.env.LIVE_REQUIRE_KEYS === '1';
 
 // Providers whose "invalid key" response is not 401.
-const invalidKeyStatus: Partial<Record<Provider, number>> = { google: 400 };
+const invalidKeyStatus: Partial<Record<Provider, number>> = { google: 400, xai: 400 };
 
 // Providers whose /models endpoint is a public catalog: it answers with the full
 // model list even for an invalid key. Asserted below rather than skipped, so the

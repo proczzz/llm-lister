@@ -52,9 +52,8 @@ type Provider =
   | 'deepseek'
   | 'google'
   | 'groq'
-  | 'nvidia'
-  | 'openai'
-  | 'openrouter';
+  // ...(more)
+  ;
 
 interface ModelInfo {
   id: string;
@@ -81,6 +80,7 @@ Returns the list of providers currently implemented by this package.
 | `nvidia`     | ✅ Supported |
 | `openai`     | ✅ Supported |
 | `openrouter` | ✅ Supported |
+| `xai`        | ✅ Supported |
 
 > **Note on `openrouter`:** OpenRouter serves both an unauthenticated catalog at
 > `/api/v1/models` and an account-scoped list at `/api/v1/models/user`. This package queries

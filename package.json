@@ -44,7 +44,8 @@
     "groq",
     "nvidia",
     "openai",
-    "openrouter"
+    "openrouter",
+    "xai"
   ],
   "devDependencies": {
     "tsup": "^8.5.1",
